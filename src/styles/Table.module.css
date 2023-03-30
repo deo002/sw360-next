@@ -1,0 +1,28 @@
+.column-header {
+    background-color: #5D8EA9;
+    color: white;
+}
+
+.row-header {
+    color: #f28809;
+}
+
+.row-header:hover,
+.row-header:focus,
+.row-header:active {
+    color: #5D8EA9;
+    text-decoration: underline;
+}
+
+.table {
+    cursor: default !important;
+}
+
+.pagination * {
+    border: none !important;
+    text-transform: lowercase !important;
+}
+
+.inline {
+    display: inline-block;
+}
