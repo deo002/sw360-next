@@ -2,12 +2,9 @@ import styles from "@/styles/Projects.module.css"
 import Navbar from "@/components/Navbar"
 import TableComponent from "@/components/table"
 import { Table } from "@/components/table/table"
+import Link from "next/link"
 
 export default function Home() {
-
-  <div>
-
-  </div>
 
   const icons: string = `<i class="bi bi-pencil"></i><i class="bi bi-check2-square"></i><i class="bi bi-clipboard"></i><i class="bi bi-archive"></i>`;
 
@@ -136,7 +133,7 @@ export default function Home() {
                 <div className="row">
                   <div className="col-lg-3">
                     <div className="btn-group d-flex mb-2" role="group" aria-label="Project Utilities">
-                      <button type="button" className={`fw-bold btn btn-primary ${styles['button']}`}>Add Project</button>
+                    <Link href="http://localhost:3000/projects/add/summary"><button type="button" className={`fw-bold btn btn-primary ${styles['button']}`}>Add Project</button></Link>
                       <button type="button" className={`fw-bold btn btn-light ${styles['button-plain']}`}>Import SBOM</button>
                     </div>
                   </div>
