@@ -7,14 +7,13 @@ import SearchUsersModalComponent from "@/components/SearchUsersModal"
 import SearchVendorsModalComponent from "@/components/SearchVendorsModal"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Vendor } from "@/components/SearchVendorsModal/Vendor"
 
 export default function Summary() {
 
   const router = useRouter();
   const [vendor, setVendor] = useState<(Vendor | null)>(null);
-  useEffect(() => {console.log(vendor);}, [vendor]);
 
   const chooseVendor = (v: Vendor | null): void => {
     setVendor(v);

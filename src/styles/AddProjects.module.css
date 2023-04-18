@@ -50,3 +50,16 @@
     color: #6b6c7e !important;
     background-color: #e89734 !important;
 }
+
+.link-button {
+    color: #f28809;
+    border: None;
+    background-color: white;
+}
+
+.link-button:hover,
+.link-button:focus,
+.link-button:active {
+    color: #5D8EA9;
+    text-decoration: underline;
+}
