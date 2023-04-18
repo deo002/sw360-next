@@ -7,9 +7,9 @@ export default function Navbar() {
         <>
             <nav className="navbar navbar-light bg-light">
                 <div className={styles["container"]}>
-                <a className="navbar-brand" href="#">
-                    <Image className="image" src="/logo.svg" alt="SW360" width={144.7} height={57} />
-                </a>
+                    <a className="navbar-brand" href="#">
+                        <Image className="image" src="/logo.svg" alt="SW360" width={144.7} height={57} />
+                    </a>
                 </div>
             </nav>
         </>
