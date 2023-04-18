@@ -38,14 +38,14 @@ export default function AddAdditionalRolesComponent() {
                         return (
                             <div className="row mb-2">
                                 <div className="col-lg-5">
-                                    <select className="form-select" name="role" value={elem.role} aria-label="additional role" onChange={e => handleInputChange(e, j)}>
-                                        <option value="Stakeholder" selected>Stakeholder</option>
+                                    <select className="form-select" name="role" value={elem.role} aria-label="additional role" defaultValue={"Stakeholder"} onChange={e => handleInputChange(e, j)}>
+                                        <option value="Stakeholder">Stakeholder</option>
                                         <option value="Analyst">Analyst</option>
-                                        <option selected value="Contributor">Contributor</option>
+                                        <option value="Contributor">Contributor</option>
                                         <option value="Accountant">Accountant</option>
                                         <option value="End User">End User</option>
                                         <option value="Quality Manager">Quality Manager</option>
-                                        <option selected value="Test Manager">Test Manager</option>
+                                        <option value="Test Manager">Test Manager</option>
                                         <option value="Technical writer">Technical writer</option>
                                         <option value="Key User">Key User</option>
                                     </select>

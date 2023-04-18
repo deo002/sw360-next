@@ -1,15 +1,30 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from "@/styles/Table.module.css"
 import { ColumnType, Table } from "./table"
 
-export default function TableComponent<T>({ data, columns, paginationSize, messageOnEmptyTable }: Table<T>): JSX.Element {
+interface Props<T> {
+    table: Table<T>;
+    chooseValueFromTable?: (values: T | null) => void;
+}
+
+export default function SelectableTableComponent<T>({ table, chooseValueFromTable }: Props<T>): JSX.Element {
+    
+    const [input, setInput] = useState<(T | null)>(null);  
+    useEffect(() => { chooseValueFromTable && chooseValueFromTable(input) }, [input]);
+    
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) : void => {
+        const ind: number = parseInt(e.target.value);
+        setInput(table.data[ind]);
+    };
+
     return(
         <>
             <div className="table-responsive">
                 <table className="table table-bordered">
                     <thead className={`${styles["column-header"]}`}>
                         <tr>
-                            {columns.map((header, i) => (
+                            <th></th>
+                            {table.columns.map((header, i) => (
                                 <th scope="col">
                                     <div className={header.isSortable ? 'd-flex justify-content-between mt-3':'mt-3'}>
                                         <span>{header.title}</span>
@@ -20,12 +35,23 @@ export default function TableComponent<T>({ data, columns, paginationSize, messa
                         </tr>
                     </thead>
                     <tbody>
-                        {data.length === 0 && <td colSpan={columns.length} style={{textAlign:"center"}}>{messageOnEmptyTable}</td>}
+                        {table.data.length === 0 && <td colSpan={table.columns.length} style={{textAlign:"center"}}>{table.messageOnEmptyTable}</td>}
                             {
-                                data.map((row, i) => (
+                                table.data.map((row, i) => (
                                     <tr>
                                         {
-                                            columns.map((elem, j) => {
+                                            <td>
+                                                <input className="form-check-input" 
+                                                   type="radio" 
+                                                   name="selectRow" 
+                                                   value={i} 
+                                                   aria-label="Select Row" 
+                                                   onChange={handleChange} 
+                                                />
+                                            </td>
+                                        }
+                                        {
+                                            table.columns.map((elem, j) => {
                                                 return (
                                                     <td className={j===0 ? `${styles["row-header"]}`: ""}>{elem.render(elem, row)}</td>
                                                 );

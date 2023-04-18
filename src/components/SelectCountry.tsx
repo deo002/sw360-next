@@ -5,8 +5,8 @@ export default function SelectCountryComponent() {
     return(
         <>
             <label htmlFor="country" className="form-label fw-bold">Country</label>      
-            <select className="form-select" aria-label="country" id="country">
-                <option selected>Select a country</option>
+            <select className="form-select" aria-label="country" id="country" defaultValue="">
+                <option value="">Select a country</option>
                 <option value="Germany">Germany</option>
                 <option value="Austria">Austria</option>
                 <option value="Switzerland">Switzerland</option>

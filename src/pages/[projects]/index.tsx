@@ -1,61 +1,99 @@
 import styles from "@/styles/Projects.module.css"
 import Navbar from "@/components/Navbar"
 import TableComponent from "@/components/table"
-import { Table } from "@/components/table/table"
+import { ColumnType, Table } from "@/components/table/table"
 import Link from "next/link"
 
 export default function Home() {
 
-  const icons: string = `<i class="bi bi-pencil"></i><i class="bi bi-check2-square"></i><i class="bi bi-clipboard"></i><i class="bi bi-archive"></i>`;
+  interface IData {
+    projectName: string;
+    description: string;
+    projectResponsible: string;
+    state: string;
+    licenseClearing: string;
+  }; // interface of data as returned from request
 
-  const table: Table = {
-    headers: [
-      {
-        headerValue: "Project Name",
-        isSortable:  true
-      },
-      {
-        headerValue: "Description",
-        isSortable:  true
-      },
-      {
-        headerValue: "Project Responsible",
-        isSortable:  true
-      },
-      {
-        headerValue: "State",
-        isSortable:  true
-      },
-      {
-        headerValue: "License Clearing",
-        isSortable:  true
-      },
-      {
-        headerValue: "Actions",
-        isSortable:  false
-      }
-    ],
-    rows: [
-      [
-        '<p>HxH</p>',
-        '<p>Description</p>',
-        '<p>oberoidearsh@gmail.com</p>',
-        '<p>0/0</p>',
-        '<div style="background-color:#68c17c;color:white;">PS</div><div style="background-color:#e6717c;color:white">CS</div>',
-        icons
-      ],
-      [
-        '<p>Aot</p>',
-        '<p>Description</p>',
-        '<p>oberoidearsh@gmail.com</p>',
-        '<p>0/0</p>',
-        '<div style="background-color:#68c17c;color:white;">PS</div><div style="background-color:#e6717c;color:white">CS</div>',
-        icons
-      ]
-    ],
-    paginationSize: 10,
-    messageOnEmptyTable: "There are no projects."
-  };
+  const columns: ColumnType<IData>[] = [
+    {
+      key: "projectName",
+      title: "Project Name",
+      isSortable: true,
+      render: (_, { projectName }) => (
+        <>
+          { projectName }
+        </>
+      )
+    },
+    {
+      key: "description",
+      title: "Description",
+      isSortable: true,
+      render: (_, { description }) => (
+        <>
+          { description }
+        </>
+      )
+    },
+    {
+      key: "projectResponsible",
+      title: "Project Responsible",
+      isSortable: true,
+      render: (_, { projectResponsible }) => (
+        <>
+          { projectResponsible }
+        </>
+      )
+    },
+    {
+      key: "state",
+      title: "State",
+      isSortable: true,
+      render: (_, { state }) => (
+        <>
+          { state }
+        </>
+      )
+    },
+    {
+      key: "licenseClearing",
+      title: "License Clearing",
+      isSortable: true,
+      render: (_, { licenseClearing }) => (
+        <>
+          <div style={{backgroundColor:"#68c17c", color:"white"}}>PS</div><div style={{backgroundColor:"#e6717c", color:"white"}}>CS</div>
+        </>
+      )
+    },
+    {
+      key: "actions",
+      title: "Actions",
+      isSortable: true,
+      // id can be passed to do operations on data
+      render: (_, { projectName, description, projectResponsible, state, licenseClearing }) => (
+        <>
+          <div><i className="bi bi-pencil"></i><i className="bi bi-check2-square"></i><i className="bi bi-clipboard"></i><i className="bi bi-archive"></i></div>
+        </>
+      )
+    },
+  ];
+
+  const rows: IData[] = [
+    {
+      projectName: "NextJS",
+      description: "A React framework.",
+      projectResponsible: "oberoidearsh@gmail.com",
+      state: "0/0",
+      licenseClearing: "done"
+    },
+        {
+      projectName: "ExpressJS",
+      description: "An Express framework.",
+      projectResponsible: "oberoidearsh@gmail.com",
+      state: "0/0",
+      licenseClearing: "done"
+    }
+  ];
 
   return (
     <>
@@ -78,8 +116,8 @@ export default function Home() {
                       </div>
                       <div className="mb-3">
                         <label htmlFor="projectType" className="form-label fw-bold">Project Type</label>
-                        <select className="form-select" id="projectType" aria-label="project type select">
-                          <option selected></option>
+                        <select className="form-select" id="projectType" aria-label="project type select" defaultValue="">
+                          <option value=""></option>
                           <option value="Customer Project">Customer Project</option>
                           <option value="Internal Project">Internal Project</option>
                           <option value="Product">Product</option>
@@ -93,15 +131,15 @@ export default function Home() {
                       </div>
                       <div className="mb-3">
                         <label htmlFor="group" className="form-label fw-bold">Group</label>
-                        <select className="form-select" id="group" aria-label="group select">
-                          <option selected></option>
+                        <select className="form-select" id="group" aria-label="group select" defaultValue="">
+                          <option value=""></option>
                           <option value="Department">Department</option>
                         </select>
                       </div>
                       <div className="mb-3">
                         <label htmlFor="state" className="form-label fw-bold">State</label>
-                        <select className="form-select" id="state" aria-label="state select">
-                          <option selected></option>
+                        <select className="form-select" id="state" aria-label="state select" defaultValue="">
+                          <option value=""></option>
                           <option value="Active">Active</option>
                           <option value="Phase Out">Phase Out</option>
                           <option value="Unknown">Unknown</option>
@@ -109,8 +147,8 @@ export default function Home() {
                       </div>
                       <div className="mb-3">
                         <label htmlFor="state" className="form-label fw-bold">State</label>
-                        <select className="form-select" id="state" aria-label="state select">
-                          <option selected></option>
+                        <select className="form-select" id="state" aria-label="state select" defaultValue="">
+                          <option value=""></option>
                           <option value="Open">Open</option>
                           <option value="In Progress">In Progress</option>
                           <option value="Closed">Closed</option>
@@ -152,11 +190,11 @@ export default function Home() {
                 <div className="row my-2">
                   <div className="col-xl-2 d-flex">
                     <p className="my-2">show</p>                   
-                      <select className="form-select form-select-sm mx-2" aria-label="page size select">
-                        <option selected value={10}>10</option>
-                        <option selected value={25}>25</option>
-                        <option selected value={50}>50</option>
-                        <option selected value={100}>100</option>
+                      <select className="form-select form-select-sm mx-2" aria-label="page size select" defaultValue={10}>
+                        <option value={10}>10</option>
+                        <option value={25}>25</option>
+                        <option value={50}>50</option>
+                        <option value={100}>100</option>
                       </select>
                     <p className="my-2">entries</p>
                   </div>
@@ -165,7 +203,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="row">
-                  <TableComponent table={table}></TableComponent>
+                  <TableComponent data={rows} columns={columns} paginationSize={10} messageOnEmptyTable="No Projects" />
                 </div>
               </div>
             </div>

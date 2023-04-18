@@ -7,16 +7,23 @@ import SearchUsersModalComponent from "@/components/SearchUsersModal"
 import SearchVendorsModalComponent from "@/components/SearchVendorsModal"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { useState, useEffect } from "react"
+import { Vendor } from "@/components/SearchVendorsModal/Vendor"
 
 export default function Summary() {
 
   const router = useRouter();
-  console.log(typeof router.pathname);
+  const [vendor, setVendor] = useState<(Vendor | null)>(null);
+  useEffect(() => {console.log(vendor);}, [vendor]);
+
+  const chooseVendor = (v: Vendor | null): void => {
+    setVendor(v);
+  };
 
   return (
     <>
       <SearchUsersModalComponent />
-      <SearchVendorsModalComponent />
+      <SearchVendorsModalComponent chooseVendor={chooseVendor} />
       <Navbar />
       <div className="mx-5 mt-1">
         <div className="row mt-2">
@@ -49,10 +56,10 @@ export default function Summary() {
                   </div>
                   <div className="col-lg-4">
                     <label htmlFor="project_visibility" className="form-label fw-bold">Project Visibility</label>
-                    <select className="form-select" aria-label="project visibility" id="project_visibility">
+                    <select className="form-select" aria-label="project visibility" id="project_visibility" defaultValue="Group and Moderators">
                       <option value="Private">Private</option>
                       <option value="Me and Moderators">Me and Moderators</option>
-                      <option selected value="Group and Moderators">Group and Moderators</option>
+                      <option value="Group and Moderators">Group and Moderators</option>
                       <option value="Everyone">Everyone</option>
                     </select>
                     <div id="learn_more_project_visibility" className="form-text"><i className="bi bi-info-circle"></i> Learn more about project visibilities.</div>
@@ -66,10 +73,10 @@ export default function Summary() {
                   </div>
                   <div className="col-lg-4">
                     <label htmlFor="project_type" className="form-label fw-bold">Project type</label>
-                    <select className="form-select" aria-label="project type" id="project_type">
+                    <select className="form-select" aria-label="project type" id="project_type" defaultValue="Product">
                       <option value="Customer Project">Customer Project</option>
                       <option value="Internal Project">Internal Project</option>
-                      <option selected value="Product">Product</option>
+                      <option value="Product">Product</option>
                       <option value="Service">Service</option>
                       <option value="Inner Source">Inner Source</option>
                     </select>
@@ -88,8 +95,8 @@ export default function Summary() {
                   </div>
                   <div className="col-lg-4">
                     <label htmlFor="domain" className="form-label fw-bold">Domain</label>
-                    <select className="form-select" aria-label="domain" id="domain">
-                    <option selected >-- Select Domain --</option>
+                    <select className="form-select" aria-label="domain" id="domain" defaultValue="">
+                    <option value="">-- Select Domain --</option>
                       <option value="Application Software">Application Software</option>
                       <option value="Documentation">Documentation</option>
                       <option value="Embedded Software">Embedded Software</option>
@@ -99,7 +106,7 @@ export default function Summary() {
                   </div>
                   <div className="col-lg-4">
                     <label htmlFor="vendor" className="form-label fw-bold">Vendor</label>
-                    <input type="text" className="form-control" data-bs-toggle="modal" data-bs-target="#search_vendors_modal" placeholder="Click to set vendor" id="vendor" aria-describedby="Vendor" readOnly={true} />
+                    <input type="text" className="form-control" data-bs-toggle="modal" data-bs-target="#search_vendors_modal" placeholder="Click to set vendor" id="vendor" aria-describedby="Vendor" readOnly={true} defaultValue={vendor?vendor.fullName:""} />
                     <div id="close_vendor" className="form-text"><i className="bi bi-x-circle"></i></div>
                   </div>
                 </div>
